@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const NavigationDrawer: React.FC = (props: any) => {
+const NavigationDrawer = () => {
   const classes = useStyles();
-  let history = useHistory();
+  const history = useHistory();
 
   const handleBikesClick = () => {
     history.push("/bikes");
