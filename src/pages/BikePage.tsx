@@ -44,9 +44,7 @@ const BikePage = () => {
         setRentedBikes(res.data || []);
       }
     });
-  }, [enqueueSnackbar]);
-
-  const deleteBike = (id: string) => {};
+  }, [enqueueSnackbar]);  
 
   return (
     <Grid container justify="center" alignItems="center" className={classes.content}>
