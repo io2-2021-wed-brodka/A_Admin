@@ -4,11 +4,14 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Pages from "./Pages";
 import { CssBaseline } from "@material-ui/core";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CssBaseline />
-    <Pages />
+    <SnackbarProvider maxSnack={3}>
+      <CssBaseline />
+      <Pages />
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
