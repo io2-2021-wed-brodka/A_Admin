@@ -1,10 +1,10 @@
 import { Redirect, Route, RouteProps } from 'react-router';
 import React from "react";
 
-export type ProtectedRouteProps = {
-  isAuthenticated: boolean;
-  redirectPath: string;
-} & RouteProps;
+interface ProtectedRouteProps extends RouteProps {
+  isAuthenticated: boolean,
+  redirectPath: string,
+}
 
 export default function ProtectedRoute({isAuthenticated, redirectPath, ...routeProps}: ProtectedRouteProps) {
   if(isAuthenticated) {

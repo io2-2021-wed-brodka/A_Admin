@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),      
       display: "flex",
       width: "100%",
+      justify: "center", 
+      alignItems: "center",      
     },
     table: {
       minWidth: 650,
@@ -47,7 +49,7 @@ const BikePage = () => {
   }, [enqueueSnackbar]);  
 
   return (
-    <Grid container justify="center" alignItems="center" className={classes.content}>
+    <Grid container className={classes.content}>
       <div>
         <Button
           className={classes.addButton}
