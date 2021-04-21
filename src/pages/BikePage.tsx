@@ -79,8 +79,7 @@ const BikePage = () => {
                   <TableCell align="right">{bike.user?.name ?? "-"}</TableCell>
                   <TableCell align="right">{bike.status}</TableCell>
                   <TableCell align="center">
-                    <Button
-                      onClick={deleteBike.bind(this, bike.id)}
+                    <Button                      
                       color="secondary"
                     >
                       Delete

@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme, Toolbar } from "@material-ui/core";
+import { createStyles, makeStyles, Toolbar } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import React from "react";
@@ -10,7 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import StationPage from "./pages/StationPage";
 import TechPage from "./pages/TechPage";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
@@ -50,24 +50,20 @@ const Pages = () => {
   return (
     <BrowserRouter>
       <div className={classes.root}>
-        <Topbar />
-        { logged && <NavigationDrawer />}
-        
+        <Topbar />        
+        { logged && <NavigationDrawer />}        
         <div>
           <Toolbar />
-          <Switch>            
+          <Switch>                    
             <Route exact path="/">
               <Redirect to="/bikes" />
             </Route>
-            <ProtectedRoute path="/bikes" component={() => <BikePage />} isAuthenticated={logged} authenticationPath="/login" />
-            <ProtectedRoute path="/techs" component={() => <TechPage />} isAuthenticated={logged} authenticationPath="/login" />
-            <ProtectedRoute path="/stations" component={() => <StationPage />} isAuthenticated={logged} authenticationPath="/login" />
-            <Route
-              path="/login"
-              component={() => (
+            <ProtectedRoute path="/bikes" component={() => <BikePage />} isAuthenticated={logged} redirectPath="/login" />
+            <ProtectedRoute path="/techs" component={() => <TechPage />} isAuthenticated={logged} redirectPath="/login" />
+            <ProtectedRoute path="/stations" component={() => <StationPage />} isAuthenticated={logged} redirectPath="/login" />
+            <ProtectedRoute path="/login" component={() => (
                 <LoginPage setToken={setToken} setUserName={setUserName} />
-              )}
-            />
+              )} isAuthenticated={!logged} redirectPath="/" />
           </Switch>
         </div>
       </div>
