@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@material-ui/core";
 import { render, RenderOptions } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 import React, { ReactElement } from "react";

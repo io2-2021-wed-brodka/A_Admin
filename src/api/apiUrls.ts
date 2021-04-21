@@ -1,3 +1,3 @@
-export const bikes: string = "bikes";
-export const stations: string = "stations";
-export const login: string = "login";
+export const bikes = "bikes";
+export const stations = "stations";
+export const login = "login";

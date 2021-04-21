@@ -11,7 +11,7 @@ export const getAllBikes = async (): Promise<IApiResponse<Bike[]>> => {
         return allBikesMock();
     }        
 
-    let url = process.env.REACT_APP_BACKEND_URL + bikes;
+    const url = process.env.REACT_APP_BACKEND_URL + bikes;
     type T = IApiResponse<Bike[]>;
     return fetch(url, {
         method: "GET",        

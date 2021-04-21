@@ -3,13 +3,13 @@ import React from "react";
 
 export type ProtectedRouteProps = {
   isAuthenticated: boolean;
-  authenticationPath: string;
+  redirectPath: string;
 } & RouteProps;
 
-export default function ProtectedRoute({isAuthenticated, authenticationPath, ...routeProps}: ProtectedRouteProps) {
+export default function ProtectedRoute({isAuthenticated, redirectPath, ...routeProps}: ProtectedRouteProps) {
   if(isAuthenticated) {
     return <Route {...routeProps} />;
   } else {
-    return <Redirect to={{ pathname: authenticationPath }} />;
+    return <Redirect to={{ pathname: redirectPath }} />;
   }
 }

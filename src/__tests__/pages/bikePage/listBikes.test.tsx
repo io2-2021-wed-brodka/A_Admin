@@ -51,7 +51,6 @@ const bikes: Bike[] = [
   },
 ];
 const fullResponse = { isError: false, responseCode: 200, data: bikes };
-const emptyResponse = { isError: false, responseCode: 200, data: [] };
 
 it("All bike ids are shown on the list", async () => {
   mockedGetAllBikes.mockResolvedValue(fullResponse);

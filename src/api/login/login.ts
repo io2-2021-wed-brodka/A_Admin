@@ -1,4 +1,4 @@
-import { loginMock } from "../../mock_data/login/bikesFromStationMock";
+import { loginMock } from "../../mock_data/login/loginMock";
 import { login as loginUrl } from "../apiUrls";
 import { handleError, handleResponse, IApiResponse } from "../apiUtils";
 
@@ -11,7 +11,7 @@ export const login = async (username: string, password: string): Promise<IApiRes
         || process.env.REACT_APP_BACKEND_URL === undefined)
         return loginMock(username, password);
 
-    let url = process.env.REACT_APP_BACKEND_URL + loginUrl;
+    const url = process.env.REACT_APP_BACKEND_URL + loginUrl;
     type T = IApiResponse<Token>;    
     return fetch(url, {
         method: "POST",
