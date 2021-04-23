@@ -1,4 +1,14 @@
-import {createStyles, makeStyles, Theme} from "@material-ui/core";
+import {
+    Button,
+    createStyles,
+    Grid,
+    makeStyles,
+    Paper,
+    Table, TableBody, TableCell,
+    TableContainer,
+    TableHead, TableRow,
+    Theme
+} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {Station} from "../models/station";
@@ -15,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
         },
         table: {
-            minWidth: 650,
+            minWidth: 450,
         },
         addButton: {
             margin: theme.spacing(2),
@@ -39,13 +49,39 @@ const StationPage = () => {
     }, [enqueueSnackbar]);
 
     return (
-        <div className={classes.content}>
-            <ul>
-                {stations.map((station) => (
-                    <li>{station.name}</li>
-                ))}
-            </ul>
-        </div>
+        <Grid container className={classes.content}>
+            <div>
+                <Button className={classes.addButton} variant="contained" color="primary">
+                    Add
+                </Button>
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Station</TableCell>
+                                <TableCell align="right">Name</TableCell>
+                                <TableCell align="center">Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {stations.map((station) => (
+                                <TableRow key={station.id}>
+                                    <TableCell component="th" scope="row">
+                                        Station {station.id}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {station.name}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Button color="secondary"> Delete </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </Grid>
     );
 };
 
