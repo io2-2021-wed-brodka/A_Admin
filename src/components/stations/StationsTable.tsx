@@ -1,4 +1,4 @@
-import {Station} from "../models/station";
+import {Station} from "../../models/station";
 import React from "react";
 import {
     Button,
@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import {Theme} from "@material-ui/core/styles";
 import {useSnackbar} from "notistack";
-import {deleteStation} from "../api/stations/deleteStation";
+import {deleteStation} from "../../api/stations/deleteStation";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
