@@ -10,7 +10,7 @@ export const allStationsMock = (): IApiResponse<Station[]> => {
             {id: "2", name: "Ratusz Arsenał", status: "active", activeBikesCount: 1},
             {id: "3", name: "Politechnika Warszawska", status: "active", activeBikesCount: 1},
             {id: "4", name: "Minas Tirith", status: "active", activeBikesCount: 0},
-            {id: "5", name: "Osgiliath", status: "blocked", activeBikesCount: 0},
+            {id: "5", name: "Osgiliath", status: "blocked", activeBikesCount: 0}
         ]
     };
 }
