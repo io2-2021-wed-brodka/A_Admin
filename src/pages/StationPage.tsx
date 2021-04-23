@@ -13,6 +13,7 @@ import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {Station} from "../models/station";
 import {getAllStations} from "../api/stations/getStations";
+import {deleteStation} from "../api/stations/deleteStation";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,11 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: theme.spacing(2),
         },
         blockButton: {
-            // color: "#e5b110"
             color: "#ee6002"
         },
         unblockButton: {
-            // color: "#77bb3e"
             color: "#09af00"
         }
     })
@@ -45,6 +44,15 @@ const StationPage = () => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
     const [stations, setStations] = useState<Station[]>([]);
+
+    const handleDelete = (id: string) => {
+        deleteStation(id).then((response) => {
+            if (response.isError)
+                enqueueSnackbar("Failed to delete station", {variant: "error"});
+            else
+                setStations((prev) => prev.filter(s => s.id != id));
+        });
+    };
 
     useEffect(() => {
         getAllStations().then((response) => {
@@ -91,7 +99,9 @@ const StationPage = () => {
                                         }
                                     </TableCell>
                                     <TableCell align="center">
-                                        <Button color="secondary">Delete</Button>
+                                        <Button color="secondary" onClick={() => handleDelete(station.id)}>
+                                            Delete
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
