@@ -25,11 +25,19 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
         },
         table: {
-            minWidth: 800,
+            minWidth: 700,
         },
         addButton: {
             margin: theme.spacing(2),
         },
+        blockButton: {
+            // color: "#e5b110"
+            color: "#ee6002"
+        },
+        unblockButton: {
+            // color: "#77bb3e"
+            color: "#09af00"
+        }
     })
 );
 
@@ -58,8 +66,7 @@ const StationPage = () => {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Station</TableCell>
-                                <TableCell align="right">Name</TableCell>
+                                <TableCell align="left">Station name</TableCell>
                                 <TableCell align="right">Status</TableCell>
                                 <TableCell align="right">Active bikes</TableCell>
                                 <TableCell align="center" colSpan={2}>Actions</TableCell>
@@ -69,10 +76,7 @@ const StationPage = () => {
                             {stations.map((station) => (
                                 <TableRow key={station.id}>
                                     <TableCell component="th" scope="row">
-                                        Station {station.id}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {station.name}
+                                        Station {station.name}
                                     </TableCell>
                                     <TableCell align="right">
                                         {station.status}
@@ -81,9 +85,10 @@ const StationPage = () => {
                                         {station.activeBikesCount}
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Button color="secondary">
-                                            {station.status === "active" ? "Block" : "Unblock"}
-                                        </Button>
+                                        {station.status === "active" ?
+                                            <Button className={classes.blockButton}>Block</Button> :
+                                            <Button className={classes.unblockButton}>Unblock</Button>
+                                        }
                                     </TableCell>
                                     <TableCell align="center">
                                         <Button color="secondary">Delete</Button>
