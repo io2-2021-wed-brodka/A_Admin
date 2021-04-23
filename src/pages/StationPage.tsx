@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
         },
         table: {
-            minWidth: 450,
+            minWidth: 800,
         },
         addButton: {
             margin: theme.spacing(2),
@@ -60,7 +60,9 @@ const StationPage = () => {
                             <TableRow>
                                 <TableCell>Station</TableCell>
                                 <TableCell align="right">Name</TableCell>
-                                <TableCell align="center">Action</TableCell>
+                                <TableCell align="right">Status</TableCell>
+                                <TableCell align="right">Active bikes</TableCell>
+                                <TableCell align="center" colSpan={2}>Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -72,8 +74,19 @@ const StationPage = () => {
                                     <TableCell align="right">
                                         {station.name}
                                     </TableCell>
+                                    <TableCell align="right">
+                                        {station.status}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {station.activeBikesCount}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button color="secondary">
+                                            {station.status === "active" ? "Block" : "Unblock"}
+                                        </Button>
+                                    </TableCell>
                                     <TableCell align="center">
-                                        <Button color="secondary"> Delete </Button>
+                                        <Button color="secondary">Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

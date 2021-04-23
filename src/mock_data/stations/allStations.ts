@@ -6,10 +6,11 @@ export const allStationsMock = (): IApiResponse<Station[]> => {
         isError: false,
         responseCode: 200,
         data: [
-            {id: "1", name: "Rondo ONZ"},
-            {id: "2", name: "Ratusz Arsenał"},
-            {id: "3", name: "Politechnika Warszawska"},
-            {id: "4", name: "Minas Tirith"},
+            {id: "1", name: "Rondo ONZ", status: "active", activeBikesCount: 1},
+            {id: "2", name: "Ratusz Arsenał", status: "active", activeBikesCount: 1},
+            {id: "3", name: "Politechnika Warszawska", status: "active", activeBikesCount: 1},
+            {id: "4", name: "Minas Tirith", status: "active", activeBikesCount: 0},
+            {id: "4", name: "Osgiliath", status: "blocked", activeBikesCount: 0},
         ]
     };
 }

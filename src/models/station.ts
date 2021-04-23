@@ -1,4 +1,6 @@
 export interface Station {
     id: string,
-    name: string
+    name: string,
+    status: string,
+    activeBikesCount: number
 }
