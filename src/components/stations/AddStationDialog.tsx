@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import {Theme} from "@material-ui/core/styles";
 import {Station} from "../../models/station";
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {useSnackbar} from "notistack";
 import {addStation} from "../../api/stations/addStation";
 
@@ -51,11 +51,9 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
         setOpen(false);
     };
 
-    const handleSubmitName = (event: React.FormEvent<HTMLInputElement>) => {
-        let name = event.currentTarget.textContent;
-        if (name !== null)
-            setName(name);
-    }
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
 
     const handleSubmit = () => {
         const station = addStation(name);
@@ -78,7 +76,7 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
             <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Create station</DialogTitle>
                 <DialogContent>
-                    <TextField label="Name" onSubmit={handleSubmitName}/>
+                    <TextField label="Name" onChange={handleNameChange}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCancel} color="primary">
