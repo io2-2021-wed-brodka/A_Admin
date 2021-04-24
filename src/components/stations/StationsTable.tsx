@@ -50,7 +50,7 @@ const StationsTable = (props: StationTableProps) => {
             if (response.isError)
                 enqueueSnackbar("Failed to delete station", {variant: "error"});
             else
-                props.setStations((prev) => prev.filter(s => s.id != id));
+                props.setStations((prev) => prev.filter(s => s.id !== id));
         });
     };
 
