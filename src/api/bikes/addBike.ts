@@ -1,7 +1,5 @@
 import { handleError, handleResponse, IApiResponse } from "../apiUtils";
 import { bikes } from "../apiUrls";
-import { Http2ServerResponse } from "http2";
-import rentBikeMock from "../../mock_data/bikes/addBikeMock";
 import { getToken } from "../login/token";
 import addBikeMock from "../../mock_data/bikes/addBikeMock";
 import { Bike } from "../../models/bike";

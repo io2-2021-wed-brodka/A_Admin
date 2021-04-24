@@ -1,4 +1,3 @@
-import { Http2ServerResponse } from "http2"
 import { IApiResponse } from "../../api/apiUtils";
 import { Bike } from "../../models/bike";
 

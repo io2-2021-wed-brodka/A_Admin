@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
     addButton: {
       margin: theme.spacing(2),
     },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-      },
   })
 );
 
@@ -37,15 +33,15 @@ const BikeTable = (props: BikeTableProps) => {
     const classes = useStyles()
     const { enqueueSnackbar } = useSnackbar();
     const handleDelete = (id: string) => {
+        const bikesCopy = [...props.bikes];
+        props.setBikes((prev) => prev.filter(b => b.id !== id));
+
         deleteBike(id).then((response) => {
           if(response.isError)
           {
             enqueueSnackbar("Could not delete bike", { variant: "error" });
-          }
-          else
-          {
-            props.setBikes((prev) => prev.filter(b => b.id !== id))
-          }        
+            props.setBikes(bikesCopy);
+          }          
         });    
       };
 

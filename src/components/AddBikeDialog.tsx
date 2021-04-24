@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,7 +11,6 @@ import { getStations } from '../api/stations/getStations';
 import { Station } from '../models/station';
 import { addBike } from '../api/bikes/addBike';
 import { Bike } from '../models/bike';
-import { PersonalVideo } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,7 +65,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
     bike.then(response => {
       if(response.isError)
       {
-        enqueueSnackbar("Could not delete bike", { variant: "error" });
+        enqueueSnackbar("Could not add bike", { variant: "error" });
       }
       else if(response.data)
       {

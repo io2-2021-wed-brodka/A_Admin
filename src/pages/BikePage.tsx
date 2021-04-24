@@ -1,17 +1,7 @@
-import { Button, Grid } from "@material-ui/core";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
-import { deleteBike } from "../api/bikes/deleteBike";
+import { useEffect, useState } from "react";
 import { getAllBikes } from "../api/bikes/getBikes";
 import AddBikeDialog from "../components/AddBikeDialog";
 import BikeTable from "../components/BikesTable";
