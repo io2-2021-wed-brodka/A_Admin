@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export interface StationTableProps {
-  stations: Station[];
-  setStations: (value: React.SetStateAction<Station[]>) => void;
+    stations: Station[];
+    setStations: (value: React.SetStateAction<Station[]>) => void;
 }
 
 const StationsTable = (props: StationTableProps) => {
@@ -47,9 +47,10 @@ const StationsTable = (props: StationTableProps) => {
     const {enqueueSnackbar} = useSnackbar();
     const handleDelete = (id: string) => {
         deleteStation(id).then((response) => {
-            if (response.isError)
-                enqueueSnackbar("Failed to delete station", {variant: "error"});
-            else
+            if (response.isError) {
+                let message = response.responseCode === 404 ? "station not found" : "station has bikes";
+                enqueueSnackbar(`Failed to delete station: ${message}`, {variant: "error"});
+            } else
                 props.setStations((prev) => prev.filter(s => s.id !== id));
         });
     };
