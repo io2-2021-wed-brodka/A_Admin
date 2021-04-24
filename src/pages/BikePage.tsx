@@ -6,6 +6,7 @@ import { getAllBikes } from "../api/bikes/getBikes";
 import AddBikeDialog from "../components/AddBikeDialog";
 import BikeTable from "../components/BikesTable";
 import { Bike } from "../models/bike";
+import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
