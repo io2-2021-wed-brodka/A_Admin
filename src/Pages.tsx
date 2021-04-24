@@ -14,6 +14,8 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
   })
 );
@@ -50,7 +52,7 @@ const Pages = () => {
   return (
     <BrowserRouter>
       <div className={classes.root}>
-        <Topbar />        
+        <Topbar logged={logged} setToken={setToken} />        
         { logged && <NavigationDrawer />}        
         <div>
           <Toolbar />
