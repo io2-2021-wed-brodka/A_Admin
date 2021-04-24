@@ -3,15 +3,18 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Pages from "./Pages";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
+import mainTheme from "./layout/mainTheme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SnackbarProvider maxSnack={3}>
-      <CssBaseline />
-      <Pages />
-    </SnackbarProvider>
+    <CssBaseline />
+    <ThemeProvider theme={mainTheme}>
+      <SnackbarProvider maxSnack={3}>      
+        <Pages />
+      </SnackbarProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
