@@ -66,9 +66,10 @@ const StationsTable = (props: StationTableProps) => {
     const handleBlock = (id: string) => {
         const station = blockStation(id)
         station.then((response) => {
-            if (response.isError)
-                enqueueSnackbar("Failed to block station", {variant: "error"});
-            else {
+            if (response.isError) {
+                let msg = response.responseCode === 404 ? "station not found" : "station already blocked";
+                enqueueSnackbar(`Failed to block station: ${msg}`, {variant: "error"});
+            } else {
                 props.setStations(prev => prev.map(s => s.id === id ? updateStationStatus(s, "blocked") : s));
             }
         });
@@ -76,9 +77,10 @@ const StationsTable = (props: StationTableProps) => {
 
     const handleUnblock = (id: string) => {
         unblockStation(id).then((response) => {
-            if (response.isError)
-                enqueueSnackbar("Failed to unblock station", {variant: "error"});
-            else {
+            if (response.isError) {
+                let msg = response.responseCode === 404 ? "station not found" : "station not blocked";
+                enqueueSnackbar(`Failed to unblock station: ${msg}`, {variant: "error"});
+            } else {
                 props.setStations(prev => prev.map(s => s.id === id ? updateStationStatus(s, "active") : s));
             }
         });
