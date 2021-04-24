@@ -1,18 +1,15 @@
 import {
-    Button,
     createStyles,
     Grid,
     makeStyles,
-    Paper,
-    Table, TableBody, TableCell,
-    TableContainer,
-    TableHead, TableRow,
     Theme
 } from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {Station} from "../models/station";
 import {getAllStations} from "../api/stations/getStations";
+import StationsTable from "../components/stations/StationsTable";
+import AddStationDialog from "../components/stations/AddStationDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,11 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: theme.spacing(2),
         },
         blockButton: {
-            // color: "#e5b110"
             color: "#ee6002"
         },
         unblockButton: {
-            // color: "#77bb3e"
             color: "#09af00"
         }
     })
@@ -59,45 +54,8 @@ const StationPage = () => {
     return (
         <Grid container className={classes.content}>
             <div>
-                <Button className={classes.addButton} variant="contained" color="primary">
-                    Add
-                </Button>
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="left">Station name</TableCell>
-                                <TableCell align="right">Status</TableCell>
-                                <TableCell align="right">Active bikes</TableCell>
-                                <TableCell align="center" colSpan={2}>Actions</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {stations.map((station) => (
-                                <TableRow key={station.id}>
-                                    <TableCell component="th" scope="row">
-                                        Station {station.name}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {station.status}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {station.activeBikesCount}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {station.status === "active" ?
-                                            <Button className={classes.blockButton}>Block</Button> :
-                                            <Button className={classes.unblockButton}>Unblock</Button>
-                                        }
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        <Button color="secondary">Delete</Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <AddStationDialog setStations={setStations}/>
+                <StationsTable stations={stations} setStations={setStations}/>
             </div>
         </Grid>
     );
