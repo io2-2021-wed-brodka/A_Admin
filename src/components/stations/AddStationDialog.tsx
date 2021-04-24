@@ -40,8 +40,8 @@ export interface AddStationDialogProps {
 
 const AddBikeDialog = (props: AddStationDialogProps) => {
     const classes = useStyles()
-    const [open, setOpen] = React.useState(false);
-    const [name, setName] = React.useState("Unnamed station");
+    const [open, setOpen] = React.useState<boolean>(false);
+    const [name, setName] = React.useState<string>("Unnamed station");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -56,8 +56,7 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
     };
 
     const handleSubmit = () => {
-        const station = addStation(name);
-        station.then(response => {
+        addStation(name).then(response => {
             if (response.isError)
                 enqueueSnackbar("Failed to add station", {variant: "error"});
             else
