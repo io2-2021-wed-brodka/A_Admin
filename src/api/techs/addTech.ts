@@ -10,8 +10,7 @@ export const addTech = async (username: string, password: string): Promise<IApiR
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
     {
         return addTechMock();
-    }
-        
+    }      
 
     let url = process.env.REACT_APP_BACKEND_URL + techs;
     type T = IApiResponse<User>;
