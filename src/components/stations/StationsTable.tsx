@@ -14,6 +14,7 @@ import {
 import {Theme} from "@material-ui/core/styles";
 import {useSnackbar} from "notistack";
 import {deleteStation} from "../../api/stations/deleteStation";
+import {blockStation} from "../../api/stations/blockStation";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -45,13 +46,29 @@ export interface StationTableProps {
 const StationsTable = (props: StationTableProps) => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
+
     const handleDelete = (id: string) => {
         deleteStation(id).then((response) => {
-            if (response.isError) {
-                let message = response.responseCode === 404 ? "station not found" : "station has bikes";
-                enqueueSnackbar(`Failed to delete station: ${message}`, {variant: "error"});
-            } else
+            if (response.isError)
+                enqueueSnackbar("Failed to delete station", {variant: "error"});
+            else
                 props.setStations((prev) => prev.filter(s => s.id !== id));
+        });
+    };
+
+    const markStationBlocked = (station: Station): Station => {
+        station.status = "blocked";
+        return station;
+    };
+
+    const handleBlock = (id: string) => {
+        const station = blockStation(id)
+        station.then((response) => {
+            if (response.isError)
+                enqueueSnackbar("Failed to block station", {variant: "error"});
+            else {
+                props.setStations(prev => prev.map(s => s.id === id ? markStationBlocked(s) : s));
+            }
         });
     };
 
@@ -79,7 +96,9 @@ const StationsTable = (props: StationTableProps) => {
                         </TableCell>
                         <TableCell align="right">
                             {station.status === "active" ?
-                                <Button className={classes.blockButton}>Block</Button> :
+                                <Button className={classes.blockButton} onClick={() => handleBlock(station.id)}>
+                                    Block
+                                </Button> :
                                 <Button className={classes.unblockButton}>Unblock</Button>
                             }
                         </TableCell>
