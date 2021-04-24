@@ -2,7 +2,7 @@ import { handleError, handleResponse, IApiResponse } from "../apiUtils";
 import { bikes } from "../apiUrls";
 import { Http2ServerResponse } from "http2";
 import { getToken } from "../login/token";
-import { deleteBikeMock } from "../../mock_data/bikes/deleteBikeMock";
+import { deleteBikeMock } from "../../mock_data/bikes/deleteBike";
 
 
 export const deleteBike = async (bikeId: string): Promise<IApiResponse<Http2ServerResponse>> => {
