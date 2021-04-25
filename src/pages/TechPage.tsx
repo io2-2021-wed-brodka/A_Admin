@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllTechs } from "../api/techs/getTechs";
 import TechTable from "../components/TechsTable";
 import AddTechDialog from "../components/AddTechDialog"
