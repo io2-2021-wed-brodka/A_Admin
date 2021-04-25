@@ -75,8 +75,7 @@ const StationsTable = (props: StationTableProps) => {
     const handleUnblock = (id: string) => {
         unblockStation(id).then((response) => {
             if (response.isError) {
-                let msg = response.responseCode === 404 ? "station not found" : "station not blocked";
-                enqueueSnackbar(`Failed to unblock station: ${msg}`, { variant: "error" });
+                enqueueSnackbar(`Failed to unblock station: ${response.errorMessage}`, { variant: "error" });
             } else {
                 props.setStations(prev => prev.map(s => s.id === id ? updateStationStatus(s, "active") : s));
             }
