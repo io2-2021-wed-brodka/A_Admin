@@ -40,8 +40,8 @@ export interface AddBikeDialogProps {
 }
 
 const AddBikeDialog = (props: AddBikeDialogProps) => {
-    const classes = useStyles()
-  const [open, setOpen] = React.useState(false);
+  const classes = useStyles()
+  const [open, setOpen] = React.useState<boolean>(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -71,9 +71,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
       {
         props.setBikes(prev => 
           response.data ? 
-          prev = [...prev, response.data]
-          :          
-          prev
+          prev = [...prev, response.data] : prev
         )
       }        
     });        
@@ -116,7 +114,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
           onChange={handleChange}
         >
           {
-            stations.map((station, _) => 
+            stations.map((station) => 
               <MenuItem value={station.id}>{station.name}</MenuItem>
             )
           }
