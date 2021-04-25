@@ -1,4 +1,4 @@
-import { allTechsMock } from "../../mock_data/techs/allTechs";
+import { allTechsMock } from "../../mock_data/techs/getTechs";
 import { User } from "../../models/user"
 import { techs } from "../apiUrls";
 import { handleError, handleResponse, IApiResponse } from "../apiUtils";

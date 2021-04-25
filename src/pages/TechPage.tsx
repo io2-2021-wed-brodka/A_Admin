@@ -1,17 +1,10 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import { Button, Grid } from "@material-ui/core";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { getAllTechs } from "../api/techs/getTechs";
+import TechTable from "../components/TechsTable";
+import AddTechDialog from "../components/AddTechDialog"
 import { User } from "../models/user";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,43 +44,11 @@ const TechPage = () => {
   return (
     <Grid className={classes.content}>
       <div>
-        <Button
-          className={classes.addButton}
-          variant="contained"
-          color="primary"
-        >
-          Add
-        </Button>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left" width="100%">Name</TableCell>
-                <TableCell align="center">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {techs.map((tech) => (
-                <TableRow key={tech.id}>
-                  <TableCell align="left">
-                    {tech.name ?? "Nameless"}
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button                      
-                      color="secondary"
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <AddTechDialog setTechs={setTechs} />
+        <TechTable setTechs={setTechs} techs={techs} />
         </div>
     </Grid>
   );
-}
-
+};
 
 export default TechPage;
