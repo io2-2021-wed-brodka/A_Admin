@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -32,8 +32,10 @@ export interface AddTechDialogProps {
 }
 
 const AddTechDialog = (props: AddTechDialogProps) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -55,18 +57,16 @@ const AddTechDialog = (props: AddTechDialogProps) => {
     setSubmitted(false);
   }
 
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleUsernameChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setUsername(event.target.value as string);
+  const handleUsernameChange = (event: React.ChangeEvent<{ value: string }>) => {
+    setUsername(event.target.value);
   };
 
   const errorUsername = () => {
     return username === '';
   }
 
-  const handlePasswordChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setPassword(event.target.value as string);
+  const handlePasswordChange = (event: React.ChangeEvent<{ value: string }>) => {
+    setPassword(event.target.value);
   };
 
   const errorPassword = () => {
@@ -74,8 +74,8 @@ const AddTechDialog = (props: AddTechDialogProps) => {
     return password === '';
   }
 
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setConfirmPassword(event.target.value as string);
+  const handleConfirmPasswordChange = (event: React.ChangeEvent<{ value: string }>) => {
+    setConfirmPassword(event.target.value);
   };
 
   const errorConfirmPassword = () => {
@@ -97,12 +97,8 @@ const AddTechDialog = (props: AddTechDialogProps) => {
         }
         else if(response.data)
         {
-          props.setTechs(prev => 
-            response.data ? 
-            prev = [...prev, response.data]
-            :          
-            prev
-          )
+          const data = response.data;
+          props.setTechs(prev => [...prev, data])
         } 
     });
 
