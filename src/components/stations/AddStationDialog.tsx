@@ -42,6 +42,7 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
     const classes = useStyles()
     const [open, setOpen] = React.useState<boolean>(false);
     const [name, setName] = React.useState<string>("Unnamed station");
+    const {enqueueSnackbar} = useSnackbar();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,13 +60,13 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
         addStation(name).then(response => {
             if (response.isError)
                 enqueueSnackbar("Failed to add station", {variant: "error"});
-            else
-                props.setStations(prev => response.data ? prev = [...prev, response.data] : prev);
+            else if (response.data) {
+                const addedStation = response.data;
+                props.setStations(prev => [...prev, addedStation]);
+            }
         });
         setOpen(false);
     };
-
-    const {enqueueSnackbar} = useSnackbar();
 
     return (
         <div>

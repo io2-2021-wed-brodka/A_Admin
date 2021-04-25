@@ -64,8 +64,7 @@ const StationsTable = (props: StationTableProps) => {
     };
 
     const handleBlock = (id: string) => {
-        const station = blockStation(id)
-        station.then((response) => {
+        blockStation(id).then((response) => {
             if (response.isError) {
                 let msg = response.responseCode === 404 ? "station not found" : "station already blocked";
                 enqueueSnackbar(`Failed to block station: ${msg}`, {variant: "error"});
