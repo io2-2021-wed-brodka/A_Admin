@@ -12,7 +12,7 @@ export const deleteTech = async (techId: string): Promise<IApiResponse<Http2Serv
         return deleteTechMock();
     }        
 
-    let url = process.env.REACT_APP_BACKEND_URL + techs + `${techId}/`;
+    let url = process.env.REACT_APP_BACKEND_URL + techs + `/${techId}`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",
