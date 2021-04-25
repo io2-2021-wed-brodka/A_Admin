@@ -14,6 +14,8 @@ import {
 import {Theme} from "@material-ui/core/styles";
 import {useSnackbar} from "notistack";
 import {deleteStation} from "../../api/stations/deleteStation";
+import {blockStation} from "../../api/stations/blockStation";
+import {unblockStation} from "../../api/stations/unblockStation";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -45,13 +47,41 @@ export interface StationTableProps {
 const StationsTable = (props: StationTableProps) => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
+
     const handleDelete = (id: string) => {
         deleteStation(id).then((response) => {
             if (response.isError) {
-                let message = response.responseCode === 404 ? "station not found" : "station has bikes";
-                enqueueSnackbar(`Failed to delete station: ${message}`, {variant: "error"});
+                let msg = response.responseCode === 404 ? "station not found" : "station has bikes or is not blocked";
+                enqueueSnackbar(`Failed to delete station: ${msg}`, {variant: "error"});
             } else
                 props.setStations((prev) => prev.filter(s => s.id !== id));
+        });
+    };
+
+    const updateStationStatus = (station: Station, status: string): Station => {
+        station.status = status;
+        return station;
+    };
+
+    const handleBlock = (id: string) => {
+        blockStation(id).then((response) => {
+            if (response.isError) {
+                let msg = response.responseCode === 404 ? "station not found" : "station already blocked";
+                enqueueSnackbar(`Failed to block station: ${msg}`, {variant: "error"});
+            } else {
+                props.setStations(prev => prev.map(s => s.id === id ? updateStationStatus(s, "blocked") : s));
+            }
+        });
+    };
+
+    const handleUnblock = (id: string) => {
+        unblockStation(id).then((response) => {
+            if (response.isError) {
+                let msg = response.responseCode === 404 ? "station not found" : "station not blocked";
+                enqueueSnackbar(`Failed to unblock station: ${msg}`, {variant: "error"});
+            } else {
+                props.setStations(prev => prev.map(s => s.id === id ? updateStationStatus(s, "active") : s));
+            }
         });
     };
 
@@ -79,8 +109,12 @@ const StationsTable = (props: StationTableProps) => {
                         </TableCell>
                         <TableCell align="right">
                             {station.status === "active" ?
-                                <Button className={classes.blockButton}>Block</Button> :
-                                <Button className={classes.unblockButton}>Unblock</Button>
+                                <Button className={classes.blockButton} onClick={() => handleBlock(station.id)}>
+                                    Block
+                                </Button> :
+                                <Button className={classes.unblockButton} onClick={() => handleUnblock(station.id)}>
+                                    Unblock
+                                </Button>
                             }
                         </TableCell>
                         <TableCell align="center">
