@@ -1,18 +1,18 @@
 import { handleError, handleResponse, IApiResponse } from "../apiUtils";
-import { techs } from "../apiUrls";
+import { bikes } from "../apiUrls";
 import { Http2ServerResponse } from "http2";
 import { getToken } from "../login/token";
-import { deleteTechMock } from "../../mock_data/techs/deleteTechMock";
+import { deleteBikeMock } from "../../mock_data/bikes/deleteBike";
 
 
-export const deleteTech = async (techId: string): Promise<IApiResponse<Http2ServerResponse>> => {
+export const deleteBike = async (bikeId: string): Promise<IApiResponse<Http2ServerResponse>> => {
 
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
     {
-        return deleteTechMock();
+        return deleteBikeMock();
     }        
 
-    let url = process.env.REACT_APP_BACKEND_URL + techs + `/${techId}`;
+    let url = process.env.REACT_APP_BACKEND_URL + bikes + `/${bikeId}/`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",

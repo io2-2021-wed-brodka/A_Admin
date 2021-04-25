@@ -1,6 +1,7 @@
 import {
   act,
   cleanup,
+  fireEvent,
   RenderResult,
 } from "@testing-library/react";
 import "regenerator-runtime/runtime";
@@ -61,6 +62,34 @@ it("Each bike has a button to remove it", async () => {
       .evaluate(".//button", row, null, XPathResult.ANY_TYPE, null)
       .iterateNext();
 
-    expect(element).toEqual(expect.anything());
+    expect(element).toBeDefined();
   });
+});
+
+it("Clicking add shows a modal dialog", async () => {
+  mockedGetAllBikes.mockResolvedValue(fullResponse);
+  let renderResult = {} as RenderResult;
+  await act(async () => {
+    renderResult = render(<BikePage />);
+  });
+
+  const button = renderResult.getByText("Add");
+
+  fireEvent.click(button);
+  expect(renderResult.getByRole('dialog')).toBeDefined();  
+});
+
+it("Clicking delete deletes a bike", async () => {
+  mockedGetAllBikes.mockResolvedValue(fullResponse);
+  let renderResult = {} as RenderResult;
+  await act(async () => {
+    renderResult = render(<BikePage />);
+  });
+
+  const list = renderResult.getAllByRole("row");  
+  const buttons = list[1].getElementsByTagName('button');
+  fireEvent.click(buttons[0]);
+  const newList = renderResult.getAllByRole("row");
+
+  expect(newList.length).toBeLessThan(list.length);
 });
