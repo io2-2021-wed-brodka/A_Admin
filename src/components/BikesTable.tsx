@@ -1,4 +1,4 @@
-import React, {  } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles, Theme, createStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
@@ -38,8 +38,19 @@ const BikeTable = (props: BikeTableProps) => {
 
         deleteBike(id).then((response) => {
           if(response.isError)
-          {
-            enqueueSnackbar("Could not delete bike", { variant: "error" });
+          {            
+            if(response.responseCode === 422)
+            {
+              enqueueSnackbar("Could not delete bike: bike not blocked", { variant: "error" });
+            }
+            else if(response.responseCode === 404)
+            {
+              enqueueSnackbar("Could not delete bike: bike not found", { variant: "error" });
+            }
+            else
+            {
+              enqueueSnackbar("Could not delete bike", { variant: "error" });
+            }            
             props.setBikes(bikesCopy);
           }          
         });    
