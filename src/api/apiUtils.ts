@@ -11,14 +11,14 @@ export const handleResponse = async <T>(response: Response): Promise<IApiRespons
         return {
             isError: false,
             responseCode: response.status,
-            data: response.status!==204 ? await response.json() : null,
+            data: response.status !== 204 ? await response.json() : null,
         }
     }
     else {
         return {
             isError: true,
             responseCode: response.status,
-            errorMessage: await response.text(),
+            errorMessage: (await response.json()).message,
         }
     }
 }
