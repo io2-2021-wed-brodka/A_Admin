@@ -69,10 +69,8 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
       }
       else if(response.data)
       {
-        props.setBikes(prev => 
-          response.data ? 
-          prev = [...prev, response.data] : prev
-        )
+        const data = response.data;
+        props.setBikes(prev => [...prev, data])        
       }        
     });        
     
@@ -85,7 +83,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
           enqueueSnackbar("Could not retrive stations", { variant: "error" });
           return;
       }
-      setStations((res.data || []).map(x => x));
+      setStations((res.data || []));
     });
   }, [enqueueSnackbar]);
 
@@ -107,9 +105,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
           </DialogContentText>
           <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Station</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+        <Select          
           value={stationId}
           onChange={handleChange}
         >
