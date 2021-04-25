@@ -2,7 +2,7 @@ import {handleError, handleResponse, IApiResponse} from "../apiUtils";
 import {Station} from "../../models/station";
 import {stations} from "../apiUrls";
 import {getToken} from "../login/token";
-import {allStationsMock} from "../../mock_data/stations/allStations";
+import {allStationsMock} from "../../mock_data/stations/allStationsMock";
 
 export const getAllStations = async (): Promise<IApiResponse<Station[]>> => {
 
