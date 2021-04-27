@@ -5,6 +5,6 @@ export const loginMock = (username: string, password: string): IApiResponse<Toke
     return {
         isError: false,
         responseCode: 200,
-        data: { token: "token" }
+        data: { token: "token", role: "admin" }
     };
 }

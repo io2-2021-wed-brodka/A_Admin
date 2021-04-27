@@ -46,7 +46,7 @@ const StationPage = () => {
             if (response.isError) {
                 enqueueSnackbar("Could not get all stations", {variant: "error"});
             } else {
-                setStations(response.data || []);
+                setStations(response.data?.stations || []);
             }
         });
     }, [enqueueSnackbar]);

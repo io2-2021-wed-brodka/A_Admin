@@ -36,7 +36,7 @@ const TechPage = () => {
       if (res.isError) {
         enqueueSnackbar("Could not get all techs", { variant: "error" });
       } else {
-        setTechs(res.data || []);
+        setTechs(res.data?.techs || []);
       }
     });
   }, [enqueueSnackbar]);  

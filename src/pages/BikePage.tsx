@@ -37,7 +37,7 @@ const BikePage = () => {
       if (res.isError) {
         enqueueSnackbar("Could not get all bikes", { variant: "error" });
       } else {
-        setBikes(res.data || []);
+        setBikes(res.data?.bikes || []);
       }
     });
   }, [enqueueSnackbar]);  
