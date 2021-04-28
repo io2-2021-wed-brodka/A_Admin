@@ -50,7 +50,11 @@ const LoginPage = (props: LoginPageProps) => {
         e.preventDefault();
         login(username, password).then(r => {
             if (r.isError) {
-                enqueueSnackbar(`Loggin failed: ${r.errorMessage}`, { variant: "error" });
+                enqueueSnackbar(`Login failed: ${r.errorMessage}`, { variant: "error" });
+            }
+            else if(r.data?.role !== "admin")
+            {
+                enqueueSnackbar(`Login failed: you are not an administrator`, { variant: "error" });
             }
             else {
                 props.setToken(r.data?.token || '');

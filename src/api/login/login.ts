@@ -4,14 +4,14 @@ import { handleError, handleResponse, IApiResponse } from "../apiUtils";
 
 export interface Token {
     token: string;
+    role: string;
 }
 export const login = async (username: string, password: string): Promise<IApiResponse<Token>> => {
 
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
     {
         return loginMock(username, password);
-    }
-        
+    }        
 
     const url = process.env.REACT_APP_BACKEND_URL + loginUrl;
     type T = IApiResponse<Token>;    

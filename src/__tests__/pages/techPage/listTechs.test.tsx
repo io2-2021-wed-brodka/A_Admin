@@ -11,19 +11,23 @@ import TechPage from "../../../pages/TechPage";
 import {getAllTechs} from "../../../api/techs/getTechs";
 import {deleteTech} from "../../../api/techs/deleteTech"
 import React from "react"
+import { Techs } from "../../../models/techs";
 
 afterEach(cleanup);
 
 jest.mock("../../../api/techs/getTechs");
 
 const mockedGetAllTechs = getAllTechs as jest.MockedFunction<typeof getAllTechs>;
-const techs: User[] = [
+const techs: Techs = 
+{techs:
+    [
     { id: "1", name: "Jan" },
     { id: "2", name: "Bartosz" },
     { id: "3", name: "Artur" },
     { id: "4", name: "Maciej" },
     { id: "5", name: "Paweł" },
- ];
+ ]
+};
 const fullGetResponse = {isError: false, responseCode: 200, data: techs};
 
 jest.mock("../../../api/techs/deleteTech");
@@ -40,7 +44,7 @@ it("All techs' names are shown on the list", async () => {
         renderResult = render(<TechPage />);
     });
 
-    techs.forEach((tech) => {
+    techs.techs.forEach((tech) => {
         expect(renderResult.getByText(tech.name, {exact: false})).toBeDefined();
     });
 });
@@ -55,7 +59,7 @@ it("Each tech has a button to delete them", async () => {
 
     const list = renderResult.getAllByRole("row");
 
-    techs.forEach((tech, index) => {
+    techs.techs.forEach((tech, index) => {
         const row = list[index + 1];
         const button = document
             .evaluate(".//button", row, null, XPathResult.ANY_TYPE, null)

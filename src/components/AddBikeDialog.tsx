@@ -7,10 +7,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import { Station } from '../models/station';
 import { addBike } from '../api/bikes/addBike';
 import { Bike } from '../models/bike';
 import { getAllStations } from '../api/stations/getStations';
+import { Station } from '../models/station';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +83,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
           enqueueSnackbar("Could not retrive stations", { variant: "error" });
           return;
       }
-      setStations((res.data || []));
+      setStations(res.data?.stations || []);
     });
   }, [enqueueSnackbar]);
 
