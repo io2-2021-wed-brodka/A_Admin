@@ -6,18 +6,20 @@ import {
 } from "@testing-library/react";
 import "regenerator-runtime/runtime";
 import { getAllBikes } from "../../../api/bikes/getBikes";
-import { Bike } from "../../../models/bike";
 import BikePage from "../../../pages/BikePage";
 import React from "react";
 
 import { render } from "../../test-utils";
+import { Bikes } from "../../../models/bikes";
 
 afterEach(cleanup);
 
 jest.mock("../../../api/bikes/getBikes");
 
 const mockedGetAllBikes = getAllBikes as jest.MockedFunction<typeof getAllBikes>;
-const bikes: Bike[] = [
+const bikes: Bikes = {
+  bikes:
+  [
   {
     id: "1", status: "", user: undefined,
     station: {id: "1", name: "Rondo ONZ", status: "active", activeBikesCount: 1}
@@ -32,7 +34,7 @@ const bikes: Bike[] = [
     id: "5", status: "", user: undefined,
     station: {id: "1", name: "Politechnika Warszawska", status: "active", activeBikesCount: 1}
   }
-];
+]};
 const fullResponse = { isError: false, responseCode: 200, data: bikes };
 
 it("All bike ids are shown on the list", async () => {
@@ -42,7 +44,7 @@ it("All bike ids are shown on the list", async () => {
     renderResult = render(<BikePage />);
   });
 
-  bikes.forEach((bike) => {
+  bikes.bikes.forEach((bike) => {
     expect(renderResult.getByText(bike.id, { exact: false })).toBeDefined();
   });
 });
@@ -56,7 +58,7 @@ it("Each bike has a button to remove it", async () => {
 
   const list = renderResult.getAllByRole("row");
 
-  bikes.forEach((bike, index) => {
+  bikes.bikes.forEach((bike, index) => {
     const row = list[index + 1];
     const element = document
       .evaluate(".//button", row, null, XPathResult.ANY_TYPE, null)

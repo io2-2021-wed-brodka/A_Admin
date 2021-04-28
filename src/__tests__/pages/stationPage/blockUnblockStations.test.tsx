@@ -1,14 +1,15 @@
 import "regenerator-runtime/runtime";
 import React from "react";
 
-import {act, cleanup, fireEvent, RenderResult} from "@testing-library/react";
-import {getAllStations} from "../../../api/stations/getStations";
-import {Station} from "../../../models/station";
-import {blockStation} from "../../../api/stations/blockStation";
-import {unblockStation} from "../../../api/stations/unblockStation";
-import {IApiResponse} from "../../../api/apiUtils";
-import {render} from "../../test-utils";
+import { act, cleanup, fireEvent, RenderResult } from "@testing-library/react";
+import { getAllStations } from "../../../api/stations/getStations";
+import { Station } from "../../../models/station";
+import { blockStation } from "../../../api/stations/blockStation";
+import { unblockStation } from "../../../api/stations/unblockStation";
+import { IApiResponse } from "../../../api/apiUtils";
+import { render } from "../../test-utils";
 import StationPage from "../../../pages/StationPage";
+import { Stations } from "../../../models/stations";
 
 afterEach(cleanup);
 
@@ -17,12 +18,12 @@ jest.mock("../../../api/stations/blockStation");
 jest.mock("../../../api/stations/unblockStation");
 
 const mockedGetAllStations = getAllStations as jest.MockedFunction<typeof getAllStations>;
-const stations: Station[] = [
+const stations: Stations = {stations:[
     {id: "1", name: "Rondo ONZ", status: "active", activeBikesCount: 1},
     {id: "2", name: "Ratusz Arsenał", status: "active", activeBikesCount: 1},
     {id: "3", name: "Politechnika Warszawska", status: "blocked", activeBikesCount: 0},
     {id: "4", name: "Minas Tirith", status: "blocked", activeBikesCount: 0},
-];
+]};
 const fullResponse = {isError: false, responseCode: 200, data: stations};
 
 const mockedBlockStation = blockStation as jest.MockedFunction<typeof blockStation>;
@@ -49,7 +50,7 @@ it("Clicking block changes station status", async () => {
         renderResult = render(<StationPage/>);
     });
 
-    mockedBlockStation.mockResolvedValue(blockStationResponse(stations[0]));
+    mockedBlockStation.mockResolvedValue(blockStationResponse(stations.stations[0]));
 
     const stationList = renderResult.getAllByRole("row");
     const blockButton = stationList[1].getElementsByTagName("button")[0];
@@ -68,7 +69,7 @@ it("Clicking block changes button text", async () => {
         renderResult = render(<StationPage/>);
     });
 
-    mockedBlockStation.mockResolvedValue(blockStationResponse(stations[1]));
+    mockedBlockStation.mockResolvedValue(blockStationResponse(stations.stations[1]));
 
     const stationList = renderResult.getAllByRole("row");
     const blockButton = stationList[2].getElementsByTagName("button")[0];
