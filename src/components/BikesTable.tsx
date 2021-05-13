@@ -4,6 +4,8 @@ import { makeStyles, Theme, createStyles, Paper, Table, TableBody, TableCell, Ta
 import { useSnackbar } from 'notistack';
 import { Bike } from '../models/bike';
 import { deleteBike } from '../api/bikes/deleteBike';
+import { blockBike } from '../api/bikes/blockBike';
+import { unblockBike } from '../api/bikes/unblockBike';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +18,13 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",      
     },
     table: {
-      minWidth: 650,
+      minWidth: 700,
+    },
+    blockButton: {
+      color: "#ee6002"
+    },
+    unblockButton: {
+        color: "#09af00"
     },
     addButton: {
       margin: theme.spacing(2),
@@ -56,6 +64,30 @@ const BikeTable = (props: BikeTableProps) => {
         });    
       };
 
+    const updateBikeStatus = (bike: Bike, status: string): Bike => {
+        bike.status = status;
+        return bike;
+    };
+    const handleBlock = (id: string) => {
+        blockBike(id).then((response) => {
+            if (response.isError) {
+                enqueueSnackbar(`Failed to block station: ${response.errorMessage}`, { variant: "error" });
+            } else {
+                props.setBikes(prev => prev.map(b => b.id === id ? updateBikeStatus(b, "blocked") : b));
+            }
+        });
+    };
+
+    const handleUnblock = (id: string) => {
+        unblockBike(id).then((response) => {
+            if (response.isError) {
+                enqueueSnackbar(`Failed to unblock station: ${response.errorMessage}`, { variant: "error" });
+            } else {
+                props.setBikes(prev => prev.map(b => b.id === id ? updateBikeStatus(b, "available") : b));
+            }
+        });
+    };
+
   return (
     <TableContainer component={Paper}>
     <Table className={classes.table} aria-label="simple table">
@@ -65,7 +97,7 @@ const BikeTable = (props: BikeTableProps) => {
           <TableCell align="right">Station</TableCell>
           <TableCell align="right">User</TableCell>
           <TableCell align="right">Status</TableCell>
-          <TableCell align="center">Action</TableCell>
+          <TableCell align="center" colSpan={2}>Action</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -79,6 +111,16 @@ const BikeTable = (props: BikeTableProps) => {
             </TableCell>
             <TableCell align="right">{bike.user?.name ?? "-"}</TableCell>
             <TableCell align="right">{bike.status}</TableCell>
+            <TableCell align="right">
+                            {bike.status !== "blocked" ?
+                                <Button className={classes.blockButton} disabled={ bike.status!=="available" } onClick={() => handleBlock(bike.id)}>
+                                    Block
+                                </Button> :
+                                <Button className={classes.unblockButton} onClick={() => handleUnblock(bike.id)}>
+                                    Unblock
+                                </Button>
+                            } 
+                        </TableCell>
             <TableCell align="center">
               <Button                      
                 color="secondary"
