@@ -71,7 +71,7 @@ const BikeTable = (props: BikeTableProps) => {
     const handleBlock = (id: string) => {
         blockBike(id).then((response) => {
             if (response.isError) {
-                enqueueSnackbar(`Failed to block station: ${response.errorMessage}`, { variant: "error" });
+                enqueueSnackbar(`Failed to block bike: ${response.errorMessage}`, { variant: "error" });
             } else {
                 props.setBikes(prev => prev.map(b => b.id === id ? updateBikeStatus(b, "blocked") : b));
             }
@@ -81,7 +81,7 @@ const BikeTable = (props: BikeTableProps) => {
     const handleUnblock = (id: string) => {
         unblockBike(id).then((response) => {
             if (response.isError) {
-                enqueueSnackbar(`Failed to unblock station: ${response.errorMessage}`, { variant: "error" });
+                enqueueSnackbar(`Failed to unblock bike: ${response.errorMessage}`, { variant: "error" });
             } else {
                 props.setBikes(prev => prev.map(b => b.id === id ? updateBikeStatus(b, "available") : b));
             }
