@@ -17,7 +17,5 @@ export const unblockBike = async (bikeId: string): Promise<IApiResponse<Http2Ser
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         }),
-    })
-        .then<T>(handleResponse)
-        .catch<T>(handleError);
+    }).then<T>(handleResponse).catch<T>(handleError);
 }

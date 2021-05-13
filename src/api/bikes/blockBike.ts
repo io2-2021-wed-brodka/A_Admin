@@ -18,7 +18,5 @@ export const blockBike = async (bikeId: string): Promise<IApiResponse<Bike>> => 
             'Authorization': getToken(),
         }),
         body: JSON.stringify({id: bikeId})
-    })
-        .then<T>(handleResponse)
-        .catch<T>(handleError);
+    }).then<T>(handleResponse).catch<T>(handleError);
 };
