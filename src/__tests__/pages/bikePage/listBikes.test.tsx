@@ -90,7 +90,7 @@ it("Clicking delete deletes a bike", async () => {
 
   const list = renderResult.getAllByRole("row");  
   const buttons = list[1].getElementsByTagName('button');
-  fireEvent.click(buttons[0]);
+  fireEvent.click(buttons[1]);
   const newList = renderResult.getAllByRole("row");
 
   expect(newList.length).toBeLessThan(list.length);
