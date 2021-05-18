@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
 import BuildIcon from "@material-ui/icons/Build";
 import BusinessIcon from "@material-ui/icons/Business";
+import PersonIcon from '@material-ui/icons/Person';
 
 const drawerWidth = 240;
 
@@ -51,6 +52,10 @@ const NavigationDrawer = () => {
     history.push("/stations");
   };
 
+  const handleUsersClick = () => {
+    history.push("/users");
+  };
+
   return (
     <div className={classes.root}>
       <Drawer
@@ -82,6 +87,13 @@ const NavigationDrawer = () => {
                 <BusinessIcon />
               </ListItemIcon>
               <ListItemText primary="Stations" />
+            </ListItem>
+
+            <ListItem button key="users" onClick={handleUsersClick}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Users" />
             </ListItem>
           </List>
         </div>
