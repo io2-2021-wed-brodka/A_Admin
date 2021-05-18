@@ -5,7 +5,6 @@ import {
     RenderResult
 } from "@testing-library/react";
 import "regenerator-runtime/runtime";
-import {User} from "../../../models/user";
 import {render} from "../../test-utils";
 import TechPage from "../../../pages/TechPage";
 import {getAllTechs} from "../../../api/techs/getTechs";

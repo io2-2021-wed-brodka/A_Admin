@@ -1,6 +1,5 @@
 import {act, cleanup, RenderResult} from "@testing-library/react";
 import "regenerator-runtime/runtime";
-import {Station} from "../../../models/station";
 import {render} from "../../test-utils";
 import StationPage from "../../../pages/StationPage";
 import {getAllStations} from "../../../api/stations/getStations";
