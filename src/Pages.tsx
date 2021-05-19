@@ -9,6 +9,7 @@ import BikePage from "./pages/BikePage";
 import LoginPage from "./pages/LoginPage";
 import StationPage from "./pages/StationPage";
 import TechPage from "./pages/TechPage";
+import UserPage from "./pages/UserPage";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -63,6 +64,7 @@ const Pages = () => {
             <ProtectedRoute path="/bikes" component={() => <BikePage />} isAuthenticated={logged} redirectPath="/login" />
             <ProtectedRoute path="/techs" component={() => <TechPage />} isAuthenticated={logged} redirectPath="/login" />
             <ProtectedRoute path="/stations" component={() => <StationPage />} isAuthenticated={logged} redirectPath="/login" />
+            <ProtectedRoute path="/users" component={() => <UserPage />} isAuthenticated={logged} redirectPath="/login" />
             <ProtectedRoute path="/login" component={() => (
                 <LoginPage setToken={setToken} setUserName={setUserName} />
               )} isAuthenticated={!logged} redirectPath="/" />
