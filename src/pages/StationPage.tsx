@@ -1,17 +1,15 @@
 import {
-    Button,
     createStyles,
-    Drawer,
     Grid,
     makeStyles,
     Theme
 } from "@material-ui/core";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
-import { getAllStations } from "../api/stations/getStations";
-import AddStationDialog from "../components/stations/AddStationDialog";
+import React, {useEffect, useState} from "react";
+import {useSnackbar} from "notistack";
+import {Station} from "../models/station";
+import {getAllStations} from "../api/stations/getStations";
 import StationsTable from "../components/stations/StationsTable";
-import { Station } from "../models/station";
+import AddStationDialog from "../components/stations/AddStationDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,10 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         unblockButton: {
             color: "#09af00"
-        },
-        drawer: {
-            minHeight:"10em",
-            height:"40em"
         }
     })
 );
@@ -46,7 +40,7 @@ const StationPage = () => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
     const [stations, setStations] = useState<Station[]>([]);
-    const [open, setOpen] = useState<boolean>(false);
+
     useEffect(() => {
         getAllStations().then((response) => {
             if (response.isError) {
@@ -57,24 +51,11 @@ const StationPage = () => {
         });
     }, [enqueueSnackbar]);
 
-    const handleClick = () =>
-    {
-        setOpen(prev => !prev);
-    }
     return (
         <Grid container className={classes.content}>
             <div>
                 <AddStationDialog setStations={setStations}/>
                 <StationsTable stations={stations} setStations={setStations}/>
-                <Button onClick={handleClick}>This</Button>
-                <Drawer
-                className={classes.drawer}
-                    variant="persistent"
-                    anchor="bottom"
-                    open={open}
-                >
-                  <div><h1>Hello</h1></div>
-                </Drawer>
             </div>
         </Grid>
     );
