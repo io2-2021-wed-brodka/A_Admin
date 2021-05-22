@@ -8,9 +8,6 @@ import {
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { getAllStations } from "../api/stations/getStations";
-import AddStationDialog from "../components/stations/AddStationDialog";
-import StationsTable from "../components/stations/StationsTable";
 import { Station } from "../models/station";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,12 +38,15 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-
-const StationPage = () => {
+export interface StationDrawerProps {
+    open: boolean,
+    stationId: string,
+    additionalStationIds: string[] | undefined
+}
+const StationDrawer = (props: StationDrawerProps) => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
     const [stations, setStations] = useState<Station[]>([]);
-    const [open, setOpen] = useState<boolean>(false);
     useEffect(() => {
         getAllStations().then((response) => {
             if (response.isError) {
@@ -57,27 +57,17 @@ const StationPage = () => {
         });
     }, [enqueueSnackbar]);
 
-    const handleClick = () =>
-    {
-        setOpen(prev => !prev);
-    }
     return (
-        <Grid container className={classes.content}>
-            <div>
-                <AddStationDialog setStations={setStations}/>
-                <StationsTable stations={stations} setStations={setStations}/>
-                <Button onClick={handleClick}>This</Button>
-                <Drawer
-                className={classes.drawer}
-                    variant="persistent"
-                    anchor="bottom"
-                    open={open}
-                >
-                  <div><h1>Hello</h1></div>
-                </Drawer>
-            </div>
-        </Grid>
+        <Drawer
+        className={classes.drawer}
+            variant="persistent"
+            anchor="bottom"
+            open={props.open}
+        >
+            <div><h1>Hello</h1></div>
+        </Drawer>
+
     );
 };
 
-export default StationPage;
+export default StationDrawer;
