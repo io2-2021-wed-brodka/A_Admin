@@ -92,7 +92,7 @@ const StationsTableChild = (props: StationTableChildProps) => {
             </Button>
         </div>
         <div className={classes.information}>
-            <div id={"child_status_"+station?.id}> Status: {station?.status} </div>
+            <div id={"child_status_"+station?.id}>Status: {station?.status}</div>
             <div id={"child_active_"+station?.id}>Active bikes: {station?.activeBikesCount}</div>
             <div id={"child_name_"+station?.id}>Name: {station?.name}</div>
         </div>
