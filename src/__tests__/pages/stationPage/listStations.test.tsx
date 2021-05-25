@@ -43,10 +43,10 @@ it("Each station has a button to block or unblock it", async () => {
     const list = renderResult.getAllByRole("row");
 
     stations.stations.forEach((station, index) => {
-        const row = list[index + 1];
-        const button = document
-            .evaluate(".//button", row, null, XPathResult.ANY_TYPE, null)
-            .iterateNext();
+        const row = list[2*index + 1];
+        const buttons = document.evaluate(".//button", row, null, XPathResult.ANY_TYPE, null);
+        buttons.iterateNext();
+        const button = buttons.iterateNext();
 
         expect(button).toBeDefined();
         if (station.status === "active")
@@ -66,11 +66,11 @@ it("Each station has a button to remove it", async () => {
     const list = renderResult.getAllByRole("row");
 
     stations.stations.forEach((station, index) => {
-        const row = list[index + 1];
+        const row = list[2*index + 1];
         const buttons = document.evaluate(".//button", row, null, XPathResult.ANY_TYPE, null);
         buttons.iterateNext();
+        buttons.iterateNext();
         const deleteButton = buttons.iterateNext();
-
         expect(deleteButton).toEqual(expect.anything());
         expect(deleteButton?.textContent).toEqual("Delete");
     });

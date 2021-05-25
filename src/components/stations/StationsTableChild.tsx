@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
         inlineHeader: {
             display: "flex",
             justifyContent:"space-between"
+        },
+        information: {
+            display: "flex",
+            justifyContent:"space-evenly"
         }
     })
 );
@@ -83,14 +87,14 @@ const StationsTableChild = (props: StationTableChildProps) => {
             <Typography variant="h6" gutterBottom>
             Station details:
             </Typography>
-            <Button color="primary">
+            <Button color="primary" disabled>
                 Edit
             </Button>
         </div>
-        <div>
-            Status: {station?.status}
-            Active bikes: {station?.activeBikesCount}
-            Name: {station?.name}
+        <div className={classes.information}>
+            <div id={"child_status_"+station?.id}> Status: {station?.status} </div>
+            <div id={"child_active_"+station?.id}>Active bikes: {station?.activeBikesCount}</div>
+            <div id={"child_name_"+station?.id}>Name: {station?.name}</div>
         </div>
         <div>
             <Typography variant="subtitle1" gutterBottom>
@@ -104,7 +108,6 @@ const StationsTableChild = (props: StationTableChildProps) => {
             </Typography>
             <MalfunctionsTable setMalfunctions={setMalfunctions} malfunctions={malfunctions}/>
         </div>
-
     </React.Fragment>);
 };
 

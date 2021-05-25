@@ -4,7 +4,7 @@ import {Station} from "../../models/station";
 import {stations} from "../apiUrls";
 import {getToken} from "../login/token";
 
-export const addStation = async (stationName: string): Promise<IApiResponse<Station>> => {
+export const addStation = async (stationName: string, bikeLimit: number): Promise<IApiResponse<Station>> => {
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return addStationMock();
 

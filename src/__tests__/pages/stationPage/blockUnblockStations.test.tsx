@@ -53,12 +53,12 @@ it("Clicking block changes station status", async () => {
     mockedBlockStation.mockResolvedValue(blockStationResponse(stations.stations[0]));
 
     const stationList = renderResult.getAllByRole("row");
-    const blockButton = stationList[1].getElementsByTagName("button")[0];
+    const blockButton = stationList[1].getElementsByTagName("button")[1];
     await act(async () => {
         fireEvent.click(blockButton);
     });
 
-    const statusNode = stationList[1].children[1];
+    const statusNode = stationList[1].children[2];
     expect(statusNode.textContent).toEqual("blocked");
 });
 
@@ -72,12 +72,12 @@ it("Clicking block changes button text", async () => {
     mockedBlockStation.mockResolvedValue(blockStationResponse(stations.stations[1]));
 
     const stationList = renderResult.getAllByRole("row");
-    const blockButton = stationList[2].getElementsByTagName("button")[0];
+    const blockButton = stationList[3].getElementsByTagName("button")[1];
     await act(async () => {
         fireEvent.click(blockButton);
     });
 
-    const updatedButton = stationList[2].getElementsByTagName("button")[0];
+    const updatedButton = stationList[3].getElementsByTagName("button")[1];
     expect(updatedButton.textContent).toEqual("Unblock");
 });
 
@@ -91,12 +91,12 @@ it("Clicking unblock changes station status", async () => {
     mockedUnblockStation.mockResolvedValue({isError: false, responseCode: 204});
 
     const stationList = renderResult.getAllByRole("row");
-    const unblockButton = stationList[3].getElementsByTagName("button")[0];
+    const unblockButton = stationList[5].getElementsByTagName("button")[1];
     await act(async () => {
         fireEvent.click(unblockButton);
     });
 
-    const statusNode = stationList[3].children[1];
+    const statusNode = stationList[5].children[2];
     expect(statusNode.textContent).toEqual("active");
 });
 
@@ -110,11 +110,11 @@ it("Clicking unblock changes button text", async () => {
     mockedUnblockStation.mockResolvedValue({isError: false, responseCode: 204});
 
     const stationList = renderResult.getAllByRole("row");
-    const unblockButton = stationList[4].getElementsByTagName("button")[0];
+    const unblockButton = stationList[7].getElementsByTagName("button")[1];
     await act(async () => {
         fireEvent.click(unblockButton);
     });
 
-    const updatedButton = stationList[4].getElementsByTagName("button")[0];
+    const updatedButton = stationList[7].getElementsByTagName("button")[1];
     expect(updatedButton.textContent).toEqual("Block");
 });
