@@ -72,6 +72,9 @@ const StationsTableChild = (props: StationTableChildProps) => {
                 setBikes(response.data?.bikes.filter(bike => bike.station?.id === props.stationId) || []);
             }
         });
+    }, [enqueueSnackbar, props.stationId]);
+
+    useEffect(() => {
         getMalfunctions().then((response) => {
             if (response.isError) {
                 enqueueSnackbar("Could not get malfunctions", {variant: "error"});
@@ -80,8 +83,7 @@ const StationsTableChild = (props: StationTableChildProps) => {
                 setMalfunctions(response.data?.malfunctions.filter(m => bikesIds.includes(m.bikeId)) || []);
             }
         });
-    }, [enqueueSnackbar, props.stationId, bikes]);
-
+    }, [enqueueSnackbar , bikes]);
     return (<React.Fragment>
         <div className={classes.inlineHeader}>
             <Typography variant="h6" gutterBottom>
@@ -95,18 +97,24 @@ const StationsTableChild = (props: StationTableChildProps) => {
             <div id={"child_status_"+station?.id}>Status: {station?.status}</div>
             <div id={"child_active_"+station?.id}>Active bikes: {station?.activeBikesCount}</div>
             <div id={"child_name_"+station?.id}>Name: {station?.name}</div>
+            <div id={"child_limit_"+station?.id}>Bike limit: {station?.bikesLimit || 10}</div>
+
         </div>
         <div>
             <Typography variant="subtitle1" gutterBottom>
             All Bikes:
             </Typography>
-            <BikeTable setBikes={setBikes} bikes={bikes} noAction={true}/>
+            {   bikes.length > 0 ?
+                <BikeTable setBikes={setBikes} bikes={bikes} noAction={true}/>
+                : "No bikes available" }
         </div>
         <div>
             <Typography variant="subtitle1" gutterBottom>
-            Malfuncions:
+            Malfunctions:
             </Typography>
-            <MalfunctionsTable setMalfunctions={setMalfunctions} malfunctions={malfunctions}/>
+            {   malfunctions.length > 0 ?
+                <MalfunctionsTable setMalfunctions={setMalfunctions} malfunctions={malfunctions}/>
+                : "No malfunctions available" }
         </div>
     </React.Fragment>);
 };
