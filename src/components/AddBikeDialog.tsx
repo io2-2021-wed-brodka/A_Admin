@@ -90,6 +90,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
   return (
     <div>      
       <Button
+          id="add-bike-button"
           className={classes.addButton}
           variant="contained"
           color="primary"
@@ -97,7 +98,7 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
         >
           Add
         </Button>
-      <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
+      <Dialog id="add-bike-dialog" open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Create bike</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -105,13 +106,14 @@ const AddBikeDialog = (props: AddBikeDialogProps) => {
           </DialogContentText>
           <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Station</InputLabel>
-        <Select          
+        <Select
+          id="station-select"
           value={stationId}
           onChange={handleChange}
         >
           {
             stations.map((station) => 
-              <MenuItem value={station.id}>{station.name}</MenuItem>
+              <MenuItem id="selectable-station" value={station.id}>{station.name}</MenuItem>
             )
           }
         </Select>

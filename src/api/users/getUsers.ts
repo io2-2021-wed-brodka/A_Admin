@@ -5,7 +5,6 @@ import { handleError, handleResponse, IApiResponse } from "../apiUtils";
 import { getToken } from "../login/token";
 
 export const getAllUsers = async (): Promise<IApiResponse<Users>> => {
-
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
     {
         return allUsersMock();

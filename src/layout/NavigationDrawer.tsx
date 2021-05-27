@@ -68,28 +68,28 @@ const NavigationDrawer = () => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key="bikes" onClick={handleBikesClick}>
+            <ListItem id="bikes-navigation" button key="bikes" onClick={handleBikesClick}>
               <ListItemIcon>
                 <DirectionsBikeIcon />
               </ListItemIcon>
               <ListItemText primary="Bikes" />
             </ListItem>
 
-            <ListItem button key="techs" onClick={handleTechsClick}>
+            <ListItem id="techs-navigation" button key="techs" onClick={handleTechsClick}>
               <ListItemIcon>
                 <BuildIcon />
               </ListItemIcon>
               <ListItemText primary="Techs" />
             </ListItem>
 
-            <ListItem button key="stations" onClick={handleStationsClick}>
+            <ListItem id="stations-navigation" button key="stations" onClick={handleStationsClick}>
               <ListItemIcon>
                 <BusinessIcon />
               </ListItemIcon>
               <ListItemText primary="Stations" />
             </ListItem>
 
-            <ListItem button key="users" onClick={handleUsersClick}>
+            <ListItem id="user-navigation" button key="users" onClick={handleUsersClick}>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>

@@ -90,7 +90,7 @@ const BikeTable = (props: BikeTableProps) => {
 
   return (
     <TableContainer component={Paper}>
-    <Table className={classes.table} aria-label="simple table">
+    <Table id="bikes-table" className={classes.table} aria-label="simple table">
       <TableHead>
         <TableRow>
           <TableCell>Bike</TableCell>

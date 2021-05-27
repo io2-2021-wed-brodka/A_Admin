@@ -67,7 +67,7 @@ const UserTable = (props: UserTableProps) => {
 
     return (
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+          <Table id="users-table" className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="left" width="100%">Name</TableCell>
