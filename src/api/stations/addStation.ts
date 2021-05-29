@@ -17,7 +17,7 @@ export const addStation = async (stationName: string, bikeLimit: number): Promis
             'Content-Type': 'application/json',
             'Authorization': getToken(),
         }),
-        body: JSON.stringify({name: stationName})
+        body: JSON.stringify({name: stationName, bikesLimit: bikeLimit})
     })
         .then<T>(handleResponse)
         .catch<T>(handleError);
