@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface BikeTableProps {
   setBikes: (value: React.SetStateAction<Bike[]>) => void;  
   bikes: Bike[];
+  noAction?: boolean;
 }
 
 const BikeTable = (props: BikeTableProps) => {
@@ -97,7 +98,7 @@ const BikeTable = (props: BikeTableProps) => {
           <TableCell align="right">Station</TableCell>
           <TableCell align="right">User</TableCell>
           <TableCell align="right">Status</TableCell>
-          <TableCell align="center" colSpan={2}>Action</TableCell>
+          {props.noAction !== true ? <TableCell align="center" colSpan={2}>Action</TableCell> : ''}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -111,7 +112,7 @@ const BikeTable = (props: BikeTableProps) => {
             </TableCell>
             <TableCell align="right">{bike.user?.name ?? "-"}</TableCell>
             <TableCell align="right">{bike.status}</TableCell>
-            <TableCell align="right">
+            {props.noAction !== true ? <TableCell align="right">
                             {bike.status !== "blocked" ?
                                 <Button className={classes.blockButton} disabled={ bike.status!=="available" } onClick={() => handleBlock(bike.id)}>
                                     Block
@@ -120,15 +121,15 @@ const BikeTable = (props: BikeTableProps) => {
                                     Unblock
                                 </Button>
                             } 
-                        </TableCell>
-            <TableCell align="center">
+                        </TableCell> :''}
+            {props.noAction !== true ? <TableCell align="center">
               <Button                      
                 color="secondary"
                 onClick={() => handleDelete(bike.id)}
               >
                 Delete
               </Button>
-            </TableCell>
+            </TableCell>  : ''}
           </TableRow>
         ))}
       </TableBody>

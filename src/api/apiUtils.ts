@@ -31,3 +31,5 @@ export const handleError = async <T>(error: any): Promise<IApiResponse<T>> => {
         errorMessage: error.message,
     }
 }
+
+export const UseMock = () => (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)

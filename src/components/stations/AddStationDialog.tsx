@@ -1,15 +1,15 @@
 import {
     Button,
     createStyles,
-    Dialog, DialogActions,
+    Dialog,
     DialogContent,
     DialogTitle, makeStyles, TextField
 } from "@material-ui/core";
-import {Theme} from "@material-ui/core/styles";
-import {Station} from "../../models/station";
-import React, {ChangeEvent} from "react";
-import {useSnackbar} from "notistack";
-import {addStation} from "../../api/stations/addStation";
+import { Theme } from "@material-ui/core/styles";
+import { useSnackbar } from "notistack";
+import React, { ChangeEvent, useState } from "react";
+import { addStation } from "../../api/stations/addStation";
+import { Station } from "../../models/station";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,6 +31,18 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: theme.spacing(1),
             minWidth: 120,
         },
+        form: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent:"space-evenly"
+        },
+        buttons: {
+            display:"flex",
+            justifyContent:"flex-end"
+        },
+        button: {
+            marrgin: "0.5em"
+        }
     })
 );
 
@@ -40,8 +52,10 @@ export interface AddStationDialogProps {
 
 const AddBikeDialog = (props: AddStationDialogProps) => {
     const classes = useStyles()
-    const [open, setOpen] = React.useState<boolean>(false);
-    const [name, setName] = React.useState<string>("Unnamed station");
+    const [open, setOpen] = useState<boolean>(false);
+    const [name, setName] = useState<string>("Unnamed station");
+    const [bikeLimit, setBikeLimit] = useState<number>(10);
+    const [limitError, setLimitError] = useState<boolean>(false);
     const {enqueueSnackbar} = useSnackbar();
 
     const handleClickOpen = () => {
@@ -56,8 +70,21 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
         setName(event.target.value);
     };
 
+    const handleBikeLimitChange = (event: ChangeEvent<HTMLInputElement>) => {
+        let tmpString = event.target.value;
+        let tmp = parseInt(tmpString);
+        if(isNaN(tmp))
+        {
+            setLimitError(true);
+            return;
+        }
+        
+        setLimitError(false);
+        setBikeLimit(tmp);
+    };
+
     const handleSubmit = () => {
-        addStation(name).then(response => {
+        addStation(name, bikeLimit).then(response => {
             if (response.isError)
                 enqueueSnackbar("Failed to add station", {variant: "error"});
             else if (response.data) {
@@ -76,16 +103,25 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
             <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Create station</DialogTitle>
                 <DialogContent>
-                    <TextField label="Name" onChange={handleNameChange}/>
+                    <form onSubmit={handleSubmit} className={classes.form}>
+                        <TextField 
+                            label="Name" 
+                            onChange={handleNameChange}/>
+                        <TextField 
+                            label="Bike limit" 
+                            error={limitError} 
+                            onChange={handleBikeLimitChange}
+                            defaultValue={bikeLimit.toString()}/>
+                        <div className={classes.buttons}>
+                            <Button className={classes.button} onClick={handleCancel} color="primary">
+                                Cancel
+                            </Button>
+                            <Button className={classes.button} type="submit" color="primary">
+                                Add
+                            </Button>
+                        </div>
+                    </form>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCancel} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleSubmit} color="primary">
-                        Add
-                    </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );

@@ -53,11 +53,11 @@ it("Clicking delete deletes a station", async () => {
     mockedDeleteStation.mockResolvedValue({isError: false, responseCode: 204});
 
     const stationList = renderResult.getAllByRole("row");
-    const deleteButton = stationList[1].getElementsByTagName("button")[1];
+    const deleteButton = stationList[1].getElementsByTagName("button")[2];
     await act(async () => {
         fireEvent.click(deleteButton);
     });
 
     const updatedStationList = renderResult.getAllByRole("row");
-    expect(updatedStationList.length).toEqual(stationList.length - 1);
+    expect(updatedStationList.length).toEqual(stationList.length - 2);
 });
