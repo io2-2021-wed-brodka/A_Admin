@@ -8,7 +8,7 @@ export const blockBike = async (bikeId: string): Promise<IApiResponse<Bike>> => 
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return blockBikeMock(bikeId);
 
-    let url = process.env.REACT_APP_BACKEND_URL + `${bikes}/blocked/`;
+    let url = process.env.REACT_APP_BACKEND_URL + `${bikes}/blocked`;
     type T = IApiResponse<Bike>;
     return fetch(url, {
         method: "POST",

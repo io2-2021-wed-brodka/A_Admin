@@ -12,7 +12,7 @@ export const deleteBike = async (bikeId: string): Promise<IApiResponse<Http2Serv
         return deleteBikeMock();
     }        
 
-    let url = process.env.REACT_APP_BACKEND_URL + bikes + `/${bikeId}/`;
+    let url = process.env.REACT_APP_BACKEND_URL + bikes + `/${bikeId}`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",

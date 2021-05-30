@@ -4,12 +4,12 @@ import {
     makeStyles,
     Theme
 } from "@material-ui/core";
-import React, {useEffect, useState} from "react";
-import {useSnackbar} from "notistack";
-import {Station} from "../models/station";
-import {getAllStations} from "../api/stations/getStations";
-import StationsTable from "../components/stations/StationsTable";
+import { useSnackbar } from "notistack";
+import React, { useEffect, useState } from "react";
+import { getAllStations } from "../api/stations/getStations";
 import AddStationDialog from "../components/stations/AddStationDialog";
+import StationsTable from "../components/stations/StationsTable";
+import { Station } from "../models/station";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         unblockButton: {
             color: "#09af00"
+        },
+        drawer: {
+            minHeight:"10em",
+            height:"40em"
         }
     })
 );
@@ -40,7 +44,6 @@ const StationPage = () => {
     const classes = useStyles();
     const {enqueueSnackbar} = useSnackbar();
     const [stations, setStations] = useState<Station[]>([]);
-
     useEffect(() => {
         getAllStations().then((response) => {
             if (response.isError) {

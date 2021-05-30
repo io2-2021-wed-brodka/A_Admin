@@ -12,11 +12,11 @@ export const allBikesMock = (): IApiResponse<Bikes> => {
             [
                 {
                     id: "1", status: "", user: undefined,
-                    station: {id: "1", name: "Rondo ONZ", status: "active", activeBikesCount: 1}
+                    station: {id: "1", name: "Rondo ONZ", status: "active", activeBikesCount: 1, bikesLimit: 10}
                 },
                 {
                     id: "2", status: "", user: undefined,
-                    station: {id: "1", name: "Ratusz Arsenał", status: "active", activeBikesCount: 1}
+                    station: {id: "1", name: "Ratusz Arsenał", status: "active", activeBikesCount: 1, bikesLimit: 10}
                 },
                 {
                     id: "3", status: "rented", 
@@ -28,7 +28,7 @@ export const allBikesMock = (): IApiResponse<Bikes> => {
                 },
                 {
                     id: "5", status: "", user: undefined,
-                    station: {id: "1", name: "Politechnika Warszawska", status: "active", activeBikesCount: 1}
+                    station: {id: "1", name: "Politechnika Warszawska", status: "active", activeBikesCount: 1, bikesLimit: 10}
                 },
             ]
         }

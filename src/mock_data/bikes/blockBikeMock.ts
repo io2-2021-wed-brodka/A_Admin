@@ -12,7 +12,8 @@ export const blockBikeMock = (bikeId: string): IApiResponse<Bike> => {
              id:"1",
              name:"Noname",
              status:"active",
-             activeBikesCount:1
+             activeBikesCount:1,
+             bikesLimit: 10
             },
             user: undefined,
             status: "blocked"
