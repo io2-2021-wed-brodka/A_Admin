@@ -8,7 +8,7 @@ export const unblockBike = async (bikeId: string): Promise<IApiResponse<Http2Ser
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return unblockBikeMock();
 
-    let url = process.env.REACT_APP_BACKEND_URL + `${bikes}/blocked/${bikeId}/`;
+    let url = process.env.REACT_APP_BACKEND_URL + `${bikes}/blocked/${bikeId}`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",

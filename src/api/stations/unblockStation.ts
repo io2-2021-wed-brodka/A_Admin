@@ -8,7 +8,7 @@ export const unblockStation = async (stationId: string): Promise<IApiResponse<Ht
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return unblockStationMock();
 
-    let url = process.env.REACT_APP_BACKEND_URL + `${stations}/blocked/${stationId}/`;
+    let url = process.env.REACT_APP_BACKEND_URL + `${stations}/blocked/${stationId}`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",
