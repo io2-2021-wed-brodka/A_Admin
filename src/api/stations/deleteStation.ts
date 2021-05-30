@@ -8,7 +8,7 @@ export const deleteStation = async (stationId: string): Promise<IApiResponse<Htt
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return deleteStationMock();
 
-    let url = process.env.REACT_APP_BACKEND_URL + stations + `/${stationId}/`;
+    let url = process.env.REACT_APP_BACKEND_URL + stations + `/${stationId}`;
     type T = IApiResponse<Http2ServerResponse>;
     return fetch(url, {
         method: "DELETE",

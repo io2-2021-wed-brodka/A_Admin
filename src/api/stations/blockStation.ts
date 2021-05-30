@@ -8,7 +8,7 @@ export const blockStation = async (stationId: string): Promise<IApiResponse<Stat
     if (parseInt(process.env.REACT_APP_MOCK_DATA || "0") === 1 || process.env.REACT_APP_BACKEND_URL === undefined)
         return blockStationMock(stationId);
 
-    let url = process.env.REACT_APP_BACKEND_URL + `${stations}/blocked/`;
+    let url = process.env.REACT_APP_BACKEND_URL + `${stations}/blocked`;
     type T = IApiResponse<Station>;
     return fetch(url, {
         method: "POST",
