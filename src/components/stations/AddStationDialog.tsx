@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
         form: {
             display: "flex",
             flexDirection: "column",
-            justifyContent:"space-evenly"
+            justifyContent: "space-evenly"
         },
         buttons: {
-            display:"flex",
-            justifyContent:"flex-end"
+            display: "flex",
+            justifyContent: "flex-end"
         },
         button: {
             marrgin: "0.5em"
@@ -73,12 +73,11 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
     const handleBikeLimitChange = (event: ChangeEvent<HTMLInputElement>) => {
         let tmpString = event.target.value;
         let tmp = parseInt(tmpString);
-        if(isNaN(tmp))
-        {
+        if (isNaN(tmp)) {
             setLimitError(true);
             return;
         }
-        
+
         setLimitError(false);
         setBikeLimit(tmp);
     };
@@ -97,19 +96,22 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
 
     return (
         <div>
-            <Button className={classes.addButton} variant="contained" color="primary" onClick={handleClickOpen}>
+            <Button id='add-station-button' className={classes.addButton} variant="contained" color="primary"
+                    onClick={handleClickOpen}>
                 Add
             </Button>
-            <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
+            <Dialog id='add-station-dialog' open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Create station</DialogTitle>
                 <DialogContent>
                     <form onSubmit={handleSubmit} className={classes.form}>
-                        <TextField 
-                            label="Name" 
+                        <TextField
+                            id='station-name-field'
+                            label="Name"
                             onChange={handleNameChange}/>
-                        <TextField 
-                            label="Bike limit" 
-                            error={limitError} 
+                        <TextField
+                            id='station-limit-field'
+                            label="Bike limit"
+                            error={limitError}
                             onChange={handleBikeLimitChange}
                             defaultValue={bikeLimit.toString()}/>
                         <div className={classes.buttons}>
