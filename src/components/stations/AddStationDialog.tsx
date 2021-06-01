@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import { useSnackbar } from "notistack";
-import React, { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { addStation } from "../../api/stations/addStation";
 import { Station } from "../../models/station";
 
