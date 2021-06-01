@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import { useSnackbar } from "notistack";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
 import { addStation } from "../../api/stations/addStation";
 import { Station } from "../../models/station";
 
@@ -82,7 +82,8 @@ const AddBikeDialog = (props: AddStationDialogProps) => {
         setBikeLimit(tmp);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         addStation(name, bikeLimit).then(response => {
             if (response.isError)
                 enqueueSnackbar("Failed to add station", {variant: "error"});
