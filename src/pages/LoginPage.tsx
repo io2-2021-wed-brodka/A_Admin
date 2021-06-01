@@ -69,12 +69,12 @@ const LoginPage = (props: LoginPageProps) => {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
-                    <Typography component="h1" variant="h5">
+                    <Typography id='signin-header' component="h1" variant="h5">
                         Sign in
                     </Typography>
                     <form className={classes.form} onSubmit={handleFormSubmit}>
                         <TextField
-                            id={"LoginInput"}
+                            id="username-field"
                             label={"Login"}
                             value={username}
                             onChange={handleUsernameChange}
@@ -86,7 +86,7 @@ const LoginPage = (props: LoginPageProps) => {
                             autoFocus
                         />
                         <TextField
-                            id={"PasswordInput"}
+                            id="password-field"
                             label={"Password"}
                             type="password"
                             value={password}
@@ -99,6 +99,7 @@ const LoginPage = (props: LoginPageProps) => {
                         />
 
                         <Button
+                            id="sign-in-button"
                             type="submit"
                             fullWidth
                             variant="contained"

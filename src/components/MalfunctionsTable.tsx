@@ -45,7 +45,7 @@ const MalfunctionsTable = (props: MalfunctionsTableProps) => {
    
   return (
     <TableContainer component={Paper}>
-    <Table className={classes.table} aria-label="simple table">
+    <Table id='malfunctions-table' className={classes.table} aria-label="simple table">
       <TableHead>
         <TableRow>
           <TableCell>Malfunction</TableCell>
@@ -60,9 +60,9 @@ const MalfunctionsTable = (props: MalfunctionsTableProps) => {
             <TableCell component="th" scope="row">
               No. {malf.id}
             </TableCell>
-            <TableCell align="right">{malf.bikeId}</TableCell>
+            <TableCell align="right">{malf.reportingUserId}</TableCell>
             <TableCell align="right">
-              {malf.reportingUserId}
+              {malf.bikeId}
             </TableCell>
             <TableCell align="left" className={classes.widestCell}>{malf.description ?? "-"}</TableCell>
           </TableRow>

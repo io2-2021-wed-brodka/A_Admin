@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  logoutButton: {    
+  logoutButton: {
     marginLeft: "auto",
     color: "#fff",
   },
@@ -36,7 +36,7 @@ const Topbar = (props: TopbarProps) => {
           </Typography>
 
           {!props.logged ||
-            <Button className={classes.logoutButton} onClick={handleLogoutClick}>Log out</Button>}
+            <Button id='logout-button' className={classes.logoutButton} onClick={handleLogoutClick}>Log out</Button>}
         </Toolbar>
       </AppBar>
     </div>

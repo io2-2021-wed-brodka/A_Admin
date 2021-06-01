@@ -109,6 +109,7 @@ const AddTechDialog = (props: AddTechDialogProps) => {
   return (
     <div>
       <Button
+          id="add-tech-button"
           className={classes.addButton}
           variant="contained"
           color="primary"
@@ -116,7 +117,7 @@ const AddTechDialog = (props: AddTechDialogProps) => {
       >
         Add
       </Button>
-      <Dialog open={open} onClose={handleClickClose} aria-labelledby="form-dialog-title">
+      <Dialog id="add-tech-dialog" open={open} onClose={handleClickClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Create new tech</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -127,7 +128,7 @@ const AddTechDialog = (props: AddTechDialogProps) => {
               <TextField 
                 required
                 error={submitted ? errorUsername() : false} 
-                id="username" 
+                id="tech-username-field" 
                 onChange={handleUsernameChange} 
                 label="Username"
                 helperText={submitted && errorUsername() ? "Username is required." : " "}
@@ -137,7 +138,7 @@ const AddTechDialog = (props: AddTechDialogProps) => {
               <TextField 
                 required 
                 error={submitted ? errorPassword() : false} 
-                id="password" 
+                id="tech-password-field" 
                 type="password" 
                 onChange={handlePasswordChange} 
                 label="Password" 
@@ -148,7 +149,7 @@ const AddTechDialog = (props: AddTechDialogProps) => {
               <TextField 
                 required 
                 error={submitted ? errorConfirmPassword() : false} 
-                id="confirmPassword" 
+                id="tech-repassword-field" 
                 type="password" 
                 onChange={handleConfirmPasswordChange} 
                 label="Confirm password" 

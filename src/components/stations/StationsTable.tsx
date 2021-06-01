@@ -101,7 +101,7 @@ const StationsTable = (props: StationTableProps) => {
         });
     };
     return <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table id='stations-table' className={classes.table} aria-label="simple table">
             <TableHead>
                 <TableRow>
                     <TableCell />
